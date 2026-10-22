@@ -614,6 +614,9 @@ prose("README.md", "it fires on 13 of the 14 days (2–14 Sep; day 1 is clean)")
 prose("README.md", "correlation −0.76")
 prose("README.md", "23 automated integrity checks")
 prose("README.md", "11 worksheets + 1 dashboard")
+prose("README.md", "built in Tableau Public and published from there")
+prose("README.md", "It was built in Tableau Public's web authoring, so Tableau's own runtime "
+      "evaluates its nine calculated fields")
 prose("README.md", "23-step walkthrough")
 prose("README.md", "93 steps")
 prose("README.md", "8 SQL-view exports + funnel_long.csv")
@@ -644,13 +647,27 @@ prose("data/data_dictionary.md", "| `error` (`ERR_MOBILE_RENDER_502`) | 28 | 37.
 prose("data/data_dictionary.md", "167 / 290 = **57.59%**")
 prose("data/data_dictionary.md", "The error fires 37.8s into the session on average")
 
-prose("dashboards/README.md", "**built and published** — 11 worksheets + 1 dashboard, live on "
-      "Tableau Public (page reports first and last published 23 Oct 2026)")
+prose("dashboards/README.md", "**built in Tableau Public and published from there** — "
+      "11 worksheets + 1 dashboard, live as of 23 Oct 2026")
+prose("dashboards/README.md", "No Tableau Desktop install has ever opened it")
 prose("dashboards/README.md", "(*Sessions, Conversions, Conversion Rate, Mobile Error Rate*)")
-prose("dashboards/README.md", "the numbers on screen were not reconciled against the CSVs")
+prose("dashboards/README.md", "the numbers drawn on screen were not reconciled against the CSVs")
 check("the live-render note only names sheets that exist in the workbook XML",
       all(s in sheets for s in ["Funnel", "Daily Trend", "Device Funnel", "Device Table"])
-      and "desktop Tableau authoring" in dash, str(sheets))
+      and "a render on this machine" in dash, str(sheets))
+legend = "Blue: conversion rate Red: mobile error rate"
+run = re.search(r"<run [^>]*>(DAILY TREND.*?)</run>", twb, re.S)
+caption = re.sub(r"\s+", " ", run.group(1)).strip() if run else ""
+check("the packaged XML's Daily Trend caption block is word-for-word what the published view drew",
+      caption == "DAILY TREND Blue: conversion rate Red: mobile error rate "
+                 "ADDITIONAL SHEETS Device Funnel Device Table"
+      and legend in re.sub(r"\s+", " ", dash), caption)
+check("the XML's win / 2019.4.0 build stamp is scripted, so it proves no desktop install",
+      "source-build" in zx.read("Documentation/build_tableau.py").decode("utf-8")
+      and 'source-platform="win"' in twb and 'source-build="2019.4.0' in twb)
+check("dashboards/README quotes Documentation/README.txt's pre-publish line honestly",
+      "This file has not been published" in zx.read("Documentation/README.txt").decode("utf-8")
+      and "This file has not been published" in dash)
 prose("dashboards/README.md", "three of the four funnel stage labels")
 prose("dashboards/README.md", "The numeric columns were never decoded, and `validation.json` "
       "records that itself under `extract_data_runtime_validation: false`")

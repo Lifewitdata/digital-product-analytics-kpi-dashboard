@@ -1,13 +1,22 @@
 # Tableau Workbook — Product_Experience_KPIs.twbx
 
-Status: **built and published** — 11 worksheets + 1 dashboard, live on
-Tableau Public (page reports first and last published 23 Oct 2026).
+Status: **built in Tableau Public and published from there** — 11 worksheets +
+1 dashboard, live as of 23 Oct 2026 (the workbook page reports that as both the
+first and last publish date). No Tableau Desktop install has ever opened it.
 
 - **Live dashboard:**
   https://public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs
 - **Packaged file:** `Product_Experience_KPIs.twbx` in this folder — the two
   build CSVs and the Hyper extract travel inside it, plus a `Documentation/`
   folder (its own build scripts, `validation.json` and revision notes).
+- **Same workbook, checked by content:** the block the published view drew under
+  the trend chart — `DAILY TREND Blue: conversion rate Red: mobile error rate
+  ADDITIONAL SHEETS Device Funnel Device Table` — is stored word-for-word in
+  this file's XML as a single wrapped text run, and the dashboard name
+  `Product Experience KPIs` and all 11 worksheet names match too.
+- Note when you open `Documentation/README.txt` inside the package: it ends
+  *"This file has not been published."* That is the revision-3 state from
+  before the 23 Oct publish, kept as build history.
 
 ## What the workbook is connected to
 
@@ -96,20 +105,22 @@ Verified in this repo, by `verify_analysis.py`:
   Mobile Error Rate*), the `Funnel` sheet with its `Page View` / `Signup
   Started` stage labels, the `Daily Trend` caption and its blue-conversion /
   red-error legend, plus the two additional sheets `Device Funnel` and `Device
-  Table`. That is Tableau's own runtime, not a screenshot — but the check read
-  labels and sheet names only; the numbers on screen were not reconciled
-  against the CSVs.
+  Table`. All four tiles are calculated fields (`COUNTD` and `SUM` ratios), so
+  Tableau's own runtime did evaluate this workbook's expressions — on Tableau
+  Public's servers. The check read labels and sheet names, though; the numbers
+  drawn on screen were not reconciled against the CSVs.
 
 Not verified here (and `Documentation/validation.json` inside the `.twbx`
 says so itself):
 
-- desktop Tableau authoring — the packaged `.twbx` was never opened in a local
-  Tableau install, so its calculated fields have not been executed by a desktop
-  runtime (`native_tableau_render_verified: false`; the published-view render
-  above is Tableau Public's server-side runtime, which is not the same thing);
-- filter interaction at runtime — the workbook really defines the `Device` and
-  `Segment` parameters and exactly four worksheets reference them, but nobody
-  has moved those sliders (`interaction_runtime_verified: false`);
+- **a render on this machine** — nothing local has opened the workbook in
+  Tableau (`native_tableau_render_verified: false`). The XML header's
+  `source-platform="win"` / `source-build="2019.4.0"` is deliberately **not**
+  offered as proof of a desktop install either: `Documentation/build_tableau.py`
+  stamps those two attributes itself;
+- **filter interaction at runtime** — the workbook really defines the `Device`
+  and `Segment` parameters and exactly four worksheets reference them, but
+  nobody has moved those sliders (`interaction_runtime_verified: false`);
 - the Hyper extract's *measure values*: what is readable from the extract file
   is its string pool — the 290 `SES-*` / `USR-*` row keys, the three device
   types, `/landing` and `/dashboard`, and three of the four funnel stage labels
