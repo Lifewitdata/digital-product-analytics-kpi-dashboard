@@ -85,30 +85,6 @@ parameters and the `Selected Device and Segment` filter field.
 - `tableau/Tableau_Build_Guide_Product_Experience_KPIs.pdf` — the same build at
   93 steps, one tick-box per click, for someone who has never opened Tableau.
 
-Both build only on the two sources above and both carry the ✅ checkpoints
-listed in the table.
-
-## What is verified, and what is not
-
-Verified in this repo, by `verify_analysis.py`:
-
-- every number in the checkpoints above recomputes from `data/raw_sample_data.csv`;
-- the two build sources are byte-reproducible from the SQL layer;
-- the packaged `.twbx` contains the same `session_level.csv` / `funnel_long.csv`
-  as `tableau/data/`;
-- the workbook XML really holds 11 worksheets + 1 dashboard with the names above;
-- the Tableau Public URL resolves to that workbook and view (control-tested
-  against a non-existent workbook, which returns `resource-not-found`);
-- and the published view **renders**. Opened in a browser on 23 Oct 2026, the
-  link above served `Product_Experience_KPIs | Tableau Public` and drew the
-  dashboard with its four KPI tiles (*Sessions, Conversions, Conversion Rate,
-  Mobile Error Rate*), the `Funnel` sheet with its `Page View` / `Signup
-  Started` stage labels, the `Daily Trend` caption and its blue-conversion /
-  red-error legend, plus the two additional sheets `Device Funnel` and `Device
-  Table`. All four tiles are calculated fields (`COUNTD` and `SUM` ratios), so
-  Tableau's own runtime did evaluate this workbook's expressions — on Tableau
-  Public's servers. The check read labels and sheet names, though; the numbers
-  drawn on screen were not reconciled against the CSVs.
 
 Not verified here (and `Documentation/validation.json` inside the `.twbx`
 says so itself):
