@@ -122,7 +122,7 @@ python python/export_tableau_data.py
 
 ## Verification
 
-`verify_analysis.py` is the gate on every number in this repo. It runs 319
+`verify_analysis.py` is the gate on every number in this repo. It runs 323
 checks in 13 sections: the raw file's shape and provenance tells, the event →
 page → funnel mapping, both SQL layers executed on DuckDB, an independent
 pandas rebuild of `session_level` compared cell-by-cell with the SQL view,

@@ -525,7 +525,11 @@ check("extract carries the three devices and the funnel strings Hyper leaves rea
 val = json.loads(zx.read("Documentation/validation.json").decode("utf-8"))
 check("validation.json is honest about what was never verified",
       val.get("native_tableau_render_verified") is False
-      and val.get("interaction_runtime_verified") is False, str(val.get("extract_sha256", ""))[:12])
+      and val.get("interaction_runtime_verified") is False
+      and val.get("extract_data_runtime_validation") is False, str(val.get("extract_sha256", ""))[:12])
+check("validation.json names the extract's origin, as dashboards/README quotes it",
+      val.get("extract_origin") == "Uploaded Book1.twbx; original extract bytes retained unchanged",
+      str(val.get("extract_origin")))
 check("validation.json's device and segment figures agree with the SQL views",
       all(val["devices"][d]["conversion_rate_pct"] == round(float(dev.loc[d, "conversion_rate_pct"]), 2)
           for d in ["Desktop", "Mobile", "Tablet"])
@@ -647,6 +651,10 @@ prose("dashboards/README.md", "the numbers on screen were not reconciled against
 check("the live-render note only names sheets that exist in the workbook XML",
       all(s in sheets for s in ["Funnel", "Daily Trend", "Device Funnel", "Device Table"])
       and "desktop Tableau authoring" in dash, str(sheets))
+prose("dashboards/README.md", "three of the four funnel stage labels")
+prose("dashboards/README.md", "The numeric columns were never decoded, and `validation.json` "
+      "records that itself under `extract_data_runtime_validation: false`")
+prose("dashboards/README.md", "nobody has moved those sliders (`interaction_runtime_verified: false`)")
 prose("dashboards/README.md", "| `Session Level` | `tableau/data/session_level.csv` | 290 |")
 prose("dashboards/README.md", "| `Funnel Long` | `tableau/data/funnel_long.csv` | 16 |")
 prose("dashboards/README.md", "public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs")

@@ -104,10 +104,17 @@ Not verified here (and `Documentation/validation.json` inside the `.twbx`
 says so itself):
 
 - desktop Tableau authoring — the packaged `.twbx` was never opened in a local
-  Tableau install, so its calculated fields have not been executed by Tableau
-  on a desktop runtime (the published-view render above is Tableau Public's
-  server-side runtime);
-- filter interaction at runtime;
-- the Hyper extract's *measure values*: its row keys (290 `SES-*` / `USR-*`
-  ids, three device types, four funnel stages) are readable from the extract
-  file and match the CSVs, but the numeric columns were not decoded.
+  Tableau install, so its calculated fields have not been executed by a desktop
+  runtime (`native_tableau_render_verified: false`; the published-view render
+  above is Tableau Public's server-side runtime, which is not the same thing);
+- filter interaction at runtime — the workbook really defines the `Device` and
+  `Segment` parameters and exactly four worksheets reference them, but nobody
+  has moved those sliders (`interaction_runtime_verified: false`);
+- the Hyper extract's *measure values*: what is readable from the extract file
+  is its string pool — the 290 `SES-*` / `USR-*` row keys, the three device
+  types, `/landing` and `/dashboard`, and three of the four funnel stage labels
+  (Hyper packs its strings, so `Onboarding Completed` never appears as a
+  literal) — and those agree with the CSVs. The numeric columns were never
+  decoded, and `validation.json` records that itself under
+  `extract_data_runtime_validation: false`, next to `extract_origin`:
+  *"Uploaded Book1.twbx; original extract bytes retained unchanged."*
