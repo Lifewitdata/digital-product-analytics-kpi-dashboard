@@ -1,0 +1,4 @@
+device_type,total_sessions,conversions,conversion_rate_pct,total_drop_offs,error_sessions,error_rate_pct
+Desktop,142,101.0,71.13,41.0,0.0,0.0
+Mobile,98,36.0,36.73,62.0,28.0,28.57
+Tablet,50,30.0,60.0,20.0,0.0,0.0

@@ -1,0 +1,13 @@
+device_type,stage_order,funnel_stage,sessions
+Desktop,1,Page View,142.0
+Desktop,2,Signup Started,134.0
+Desktop,3,Form Step 1 Completed,114.0
+Desktop,4,Onboarding Completed,101.0
+Mobile,1,Page View,98.0
+Mobile,2,Signup Started,61.0
+Mobile,3,Form Step 1 Completed,50.0
+Mobile,4,Onboarding Completed,36.0
+Tablet,1,Page View,50.0
+Tablet,2,Signup Started,46.0
+Tablet,3,Form Step 1 Completed,37.0
+Tablet,4,Onboarding Completed,30.0

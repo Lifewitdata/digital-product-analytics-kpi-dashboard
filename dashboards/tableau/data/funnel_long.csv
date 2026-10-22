@@ -1,0 +1,17 @@
+device_type,stage_order,funnel_stage,page_url,sessions,stage_retention_pct,cumulative_retention_pct
+All Devices,1,Page View,/landing,290,100.0,100.0
+All Devices,2,Signup Started,/onboarding-1,241,83.1,83.1
+All Devices,3,Form Step 1 Completed,/onboarding-2,201,83.4,69.31
+All Devices,4,Onboarding Completed,/dashboard,167,83.08,57.59
+Desktop,1,Page View,/landing,142,100.0,100.0
+Desktop,2,Signup Started,/onboarding-1,134,94.37,94.37
+Desktop,3,Form Step 1 Completed,/onboarding-2,114,85.07,80.28
+Desktop,4,Onboarding Completed,/dashboard,101,88.6,71.13
+Mobile,1,Page View,/landing,98,100.0,100.0
+Mobile,2,Signup Started,/onboarding-1,61,62.24,62.24
+Mobile,3,Form Step 1 Completed,/onboarding-2,50,81.97,51.02
+Mobile,4,Onboarding Completed,/dashboard,36,72.0,36.73
+Tablet,1,Page View,/landing,50,100.0,100.0
+Tablet,2,Signup Started,/onboarding-1,46,92.0,92.0
+Tablet,3,Form Step 1 Completed,/onboarding-2,37,80.43,74.0
+Tablet,4,Onboarding Completed,/dashboard,30,81.08,60.0

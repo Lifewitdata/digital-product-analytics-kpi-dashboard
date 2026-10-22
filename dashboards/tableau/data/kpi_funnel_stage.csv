@@ -1,0 +1,5 @@
+stage_order,funnel_stage,page_url,sessions,stage_retention_pct,cumulative_retention_pct
+1,Page View,/landing,290.0,,100.0
+2,Signup Started,/onboarding-1,241.0,83.1,83.1
+3,Form Step 1 Completed,/onboarding-2,201.0,83.4,69.31
+4,Onboarding Completed,/dashboard,167.0,83.08,57.59

@@ -1,0 +1,4 @@
+user_segment,total_sessions,conversions,conversion_rate_pct,error_sessions,avg_session_duration_sec
+Enterprise,50,30.0,60.0,4.0,106.8
+Free,166,89.0,53.61,17.0,97.3
+Premium,74,48.0,64.86,7.0,105.5
