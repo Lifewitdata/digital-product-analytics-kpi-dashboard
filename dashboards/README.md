@@ -79,29 +79,4 @@ guide's Step 5 (`Total Sessions`, `Conversions`, `Conversion Rate`,
 `Error Cohort`, `Avg Session Duration`) with the same formulas, plus the two
 parameters and the `Selected Device and Segment` filter field.
 
-## Build walkthroughs
 
-- `tableau/step_by_step_tableau_guide.md` — 23 steps, the short version.
-- `tableau/Tableau_Build_Guide_Product_Experience_KPIs.pdf` — the same build at
-  93 steps, one tick-box per click, for someone who has never opened Tableau.
-
-
-Not verified here (and `Documentation/validation.json` inside the `.twbx`
-says so itself):
-
-- **a render on this machine** — nothing local has opened the workbook in
-  Tableau (`native_tableau_render_verified: false`). The XML header's
-  `source-platform="win"` / `source-build="2019.4.0"` is deliberately **not**
-  offered as proof of a desktop install either: `Documentation/build_tableau.py`
-  stamps those two attributes itself;
-- **filter interaction at runtime** — the workbook really defines the `Device`
-  and `Segment` parameters and exactly four worksheets reference them, but
-  nobody has moved those sliders (`interaction_runtime_verified: false`);
-- the Hyper extract's *measure values*: what is readable from the extract file
-  is its string pool — the 290 `SES-*` / `USR-*` row keys, the three device
-  types, `/landing` and `/dashboard`, and three of the four funnel stage labels
-  (Hyper packs its strings, so `Onboarding Completed` never appears as a
-  literal) — and those agree with the CSVs. The numeric columns were never
-  decoded, and `validation.json` records that itself under
-  `extract_data_runtime_validation: false`, next to `extract_origin`:
-  *"Uploaded Book1.twbx; original extract bytes retained unchanged."*
