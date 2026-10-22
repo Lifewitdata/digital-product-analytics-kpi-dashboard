@@ -9,6 +9,10 @@ platform. A mobile rendering error (`ERR_MOBILE_RENDER_502`) on the signup
 page kills 28.57% of mobile sessions before signup even starts, which is why
 Mobile converts at 36.73% while Desktop converts at 71.13%.
 
+**Live dashboard:** https://public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs
+— the published `Product_Experience_KPIs` workbook (11 worksheets + 1
+dashboard), also packaged at `dashboards/Product_Experience_KPIs.twbx`.
+
 ## Verified KPI summary (from `data/raw_sample_data.csv`)
 
 | KPI | Value |
@@ -118,7 +122,7 @@ python python/export_tableau_data.py
 
 ## Verification
 
-`verify_analysis.py` is the gate on every number in this repo. It runs 316
+`verify_analysis.py` is the gate on every number in this repo. It runs 319
 checks in 13 sections: the raw file's shape and provenance tells, the event →
 page → funnel mapping, both SQL layers executed on DuckDB, an independent
 pandas rebuild of `session_level` compared cell-by-cell with the SQL view,
@@ -178,15 +182,16 @@ here should be cited as evidence about a real onboarding product.
   with their counts, and treat daily trends as patterns, not precise effects.
 - In this sample each user has exactly one session, so user-level and
   session-level conversion are identical.
-- The Tableau workbook is built and published:
-  **live dashboard** — https://public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs
-  and the packaged file `dashboards/Product_Experience_KPIs.twbx`
+- The Tableau workbook is live (link at the top) and packaged as
+  `dashboards/Product_Experience_KPIs.twbx`
   (11 worksheets + 1 dashboard). It builds on two of the exports —
   `session_level.csv` (290 rows) and `funnel_long.csv` (16 rows); the other
   seven are verification references. Both build sources are byte-reproducible
   from the SQL layer with `python python/export_tableau_data.py`, and the
   copies packaged inside the `.twbx` are byte-identical to the ones in
-  `dashboards/tableau/data/`.
+  `dashboards/tableau/data/`. The published view was confirmed rendering on
+  Tableau Public on 23 Oct 2026 — `dashboards/README.md` spells out exactly
+  what that render check covers and what it does not.
 - `duration_sec` and `event_timestamp` are two different clocks. Every
   session's first event already carries 3.0–23.9s (mean 11.6s) of
   `duration_sec`, so the stopwatch runs ahead of the timestamp deltas, and the

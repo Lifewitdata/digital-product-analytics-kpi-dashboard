@@ -1,6 +1,7 @@
 # Tableau Workbook — Product_Experience_KPIs.twbx
 
-Status: **built and published** (22 Oct 2026) — 11 worksheets + 1 dashboard.
+Status: **built and published** — 11 worksheets + 1 dashboard, live on
+Tableau Public (page reports first and last published 23 Oct 2026).
 
 - **Live dashboard:**
   https://public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs
@@ -88,14 +89,24 @@ Verified in this repo, by `verify_analysis.py`:
   as `tableau/data/`;
 - the workbook XML really holds 11 worksheets + 1 dashboard with the names above;
 - the Tableau Public URL resolves to that workbook and view (control-tested
-  against a non-existent workbook, which returns `resource-not-found`).
+  against a non-existent workbook, which returns `resource-not-found`);
+- and the published view **renders**. Opened in a browser on 23 Oct 2026, the
+  link above served `Product_Experience_KPIs | Tableau Public` and drew the
+  dashboard with its four KPI tiles (*Sessions, Conversions, Conversion Rate,
+  Mobile Error Rate*), the `Funnel` sheet with its `Page View` / `Signup
+  Started` stage labels, the `Daily Trend` caption and its blue-conversion /
+  red-error legend, plus the two additional sheets `Device Funnel` and `Device
+  Table`. That is Tableau's own runtime, not a screenshot — but the check read
+  labels and sheet names only; the numbers on screen were not reconciled
+  against the CSVs.
 
 Not verified here (and `Documentation/validation.json` inside the `.twbx`
 says so itself):
 
-- native Tableau rendering — no Tableau runtime was available in this
-  environment, so the pixel output and the calculated fields have not been
-  executed by Tableau;
+- desktop Tableau authoring — the packaged `.twbx` was never opened in a local
+  Tableau install, so its calculated fields have not been executed by Tableau
+  on a desktop runtime (the published-view render above is Tableau Public's
+  server-side runtime);
 - filter interaction at runtime;
 - the Hyper extract's *measure values*: its row keys (290 `SES-*` / `USR-*`
   ids, three device types, four funnel stages) are readable from the extract

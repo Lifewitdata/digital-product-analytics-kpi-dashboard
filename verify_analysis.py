@@ -640,7 +640,13 @@ prose("data/data_dictionary.md", "| `error` (`ERR_MOBILE_RENDER_502`) | 28 | 37.
 prose("data/data_dictionary.md", "167 / 290 = **57.59%**")
 prose("data/data_dictionary.md", "The error fires 37.8s into the session on average")
 
-prose("dashboards/README.md", "**built and published** (22 Oct 2026) — 11 worksheets + 1 dashboard")
+prose("dashboards/README.md", "**built and published** — 11 worksheets + 1 dashboard, live on "
+      "Tableau Public (page reports first and last published 23 Oct 2026)")
+prose("dashboards/README.md", "(*Sessions, Conversions, Conversion Rate, Mobile Error Rate*)")
+prose("dashboards/README.md", "the numbers on screen were not reconciled against the CSVs")
+check("the live-render note only names sheets that exist in the workbook XML",
+      all(s in sheets for s in ["Funnel", "Daily Trend", "Device Funnel", "Device Table"])
+      and "desktop Tableau authoring" in dash, str(sheets))
 prose("dashboards/README.md", "| `Session Level` | `tableau/data/session_level.csv` | 290 |")
 prose("dashboards/README.md", "| `Funnel Long` | `tableau/data/funnel_long.csv` | 16 |")
 prose("dashboards/README.md", "public.tableau.com/app/profile/isfaque.ansari5273/viz/Product_Experience_KPIs/ProductExperienceKPIs")
